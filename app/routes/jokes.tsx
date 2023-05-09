@@ -1,5 +1,5 @@
 import { json, LoaderArgs, type LinksFunction } from '@remix-run/node';
-import { Outlet, Link, useLoaderData } from '@remix-run/react';
+import { Outlet, Link, useLoaderData, Form } from '@remix-run/react';
 
 import stylesUrl from '~/styles/jokes.css';
 import { db } from '~/utils/db.server';
@@ -45,7 +45,7 @@ export default function JokesRoute() {
           {data.user ? (
             <div className="user-info">
               <span>{`Hi ${data.user.username}`}</span>
-              <form
+              <Form
                 action="/logout"
                 method="post"
               >
@@ -55,7 +55,7 @@ export default function JokesRoute() {
                 >
                   Logout
                 </button>
-              </form>
+              </Form>
             </div>
           ) : (
             <Link to="/login">Login</Link>
@@ -70,7 +70,7 @@ export default function JokesRoute() {
             <ul>
               {data.jokeListItems.map((joke) => (
                 <li key={joke.id}>
-                  <Link to={joke.id}>{joke.name}</Link>
+                  <Link to={joke.id} prefetch='intent'>{joke.name}</Link>
                 </li>
               ))}
             </ul>
@@ -88,4 +88,12 @@ export default function JokesRoute() {
       </main>
     </div>
   );
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="error-container">
+      Sorry. Something went wrong. Please try again later!
+    </div>
+  )
 }
