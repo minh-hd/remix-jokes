@@ -1,4 +1,5 @@
-import { json, LoaderArgs, type LinksFunction } from '@remix-run/node';
+import type { LoaderArgs} from '@remix-run/node';
+import { json, type LinksFunction } from '@remix-run/node';
 import { Outlet, Link, useLoaderData, Form } from '@remix-run/react';
 
 import stylesUrl from '~/styles/jokes.css';

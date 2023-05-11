@@ -1,8 +1,20 @@
+# dependencies
 node_modules
 
+# production
 /.cache
 /build
 /public/build
+
+# environment variables
 .env
 
+# database
 /prisma/dev.db
+
+#testing
+/coverage
+
+# development config
+.hintrc
+.vscode

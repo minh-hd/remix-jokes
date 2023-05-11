@@ -7,12 +7,16 @@ type LoginForm = {
   password: string;
 };
 
-export async function login({ username, password }: LoginForm) {
-  const user = await db.user.findUnique({
+export async function getUserByUsername(username: string) {
+  return await db.user.findUnique({
     where: {
       username
     }
   });
+}
+
+export async function login({ username, password }: LoginForm) {
+  const user = await getUserByUsername(username);
 
   if(!user) return null;
 
@@ -29,6 +33,10 @@ export async function login({ username, password }: LoginForm) {
 }
 
 export async function register({ username, password }: LoginForm) {
+  const existedUser = await getUserByUsername(username);
+
+  if (existedUser) return null;
+
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = await db.user.create({
@@ -41,7 +49,7 @@ export async function register({ username, password }: LoginForm) {
   return { userId: user.id, username };
 }
 
-const sessionSecret = process.env.SESSION_SECRET;
+export const sessionSecret = process.env.SESSION_SECRET;
 
 if (!sessionSecret) {
   throw new Error('SESSION_SECRET is not set');
