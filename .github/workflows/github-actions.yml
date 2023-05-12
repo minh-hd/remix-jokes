@@ -23,9 +23,9 @@ jobs:
   
   test:
     runs-on: ubuntu-latest
+    env:
+      SESSION_SECRET: ${{ 'test' }}
     steps:
-      - env:
-          SESSION_SECRET: ${{ 'test' }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
