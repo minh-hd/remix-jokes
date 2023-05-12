@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SESSION_SECRET: ${{ 'test' }}
+      DATABASE_URL: ${{ 'file:./dev.db' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
