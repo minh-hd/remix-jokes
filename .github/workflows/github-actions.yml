@@ -9,8 +9,6 @@ on:
       - main
       - staging
       - develop
-env:
-  SESSION_SECRET: ${{SESSION_SECRET}}
 jobs:
   build:
     runs-on: ubuntu-latest
