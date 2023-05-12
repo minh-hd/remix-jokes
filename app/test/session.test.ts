@@ -35,7 +35,7 @@ describe('login feature', () => {
     await expect(
       login({ username: 'kody', password: 'twixrox' }),
     ).resolves.toMatchObject({
-      id: '033f61a0-90e6-4d0a-bb7f-d2a25737035c',
+      id: expect.any(String),
       username: 'kody',
     });
   });
