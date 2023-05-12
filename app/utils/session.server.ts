@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { db } from "./db.server";
+import type { Session, SessionData } from "@remix-run/node";
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 
 type LoginForm = {
@@ -81,8 +82,10 @@ export async function createUserSession(userId: string, redirectTo: string) {
   });
 }
 
-function getUserSession(request: Request) {
-  return storage.getSession(request.headers.get("Cookie"));
+function getUserSession(
+  request: Request,
+): Promise<Session<SessionData, SessionData>> {
+  return storage.getSession(request.headers.get('Cookie'));
 }
 
 export async function getUserId(request: Request) {

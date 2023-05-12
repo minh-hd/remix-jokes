@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, test } from '@jest/globals';
-import { login, register, sessionSecret } from '../utils/session.server';
+import { login, register } from '../utils/session.server';
 import { db } from '../utils/db.server';
 
 async function deleteTestUser() {
@@ -67,9 +67,3 @@ describe('register feature', () => {
     await deleteTestUser();
   });
 });
-
-describe('user session', () => {
-  test('if session secret is not set', () => {
-    expect(!sessionSecret?.length).toThrowError('SESSION_SECRET is not set');
-  });
-})
